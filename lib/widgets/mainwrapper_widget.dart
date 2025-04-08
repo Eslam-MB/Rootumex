@@ -10,15 +10,19 @@ class Mainwrapper extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: AppBar(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           title: const Text(
             "ROOTUMEX",
             style: TextStyle(
-                fontSize: 25, fontFamily: "Inter", fontWeight: FontWeight.w900),
+                fontSize: 25,
+                fontFamily: "Inter",
+                fontWeight: FontWeight.w900,
+                color: Color(0xff143D60)),
           ),
           centerTitle: true,
         ),
       ),
-      body: SafeArea(child: child),
+      body: SafeArea(minimum: const EdgeInsets.all(8), child: child),
     );
   }
 }

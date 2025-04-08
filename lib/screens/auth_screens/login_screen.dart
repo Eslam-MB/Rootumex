@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -10,6 +10,8 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   bool isObscured = true;
   @override
   Widget build(BuildContext context) {
@@ -40,59 +42,88 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 30),
-              const Text(
-                "Username",
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-              ),
-              const SizedBox(height: 7),
-              const TextField(
-                decoration: InputDecoration(
-                  hintText: 'Write your username',
+              Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "Username",
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                    ),
+                    const SizedBox(height: 7),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: 'Write your username',
+                      ),
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.w700),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Username required';
+                        }
+                        return null;
+                      },
+                    ),
+
+                    const SizedBox(height: 25),
+                    const Text(
+                      "Password",
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
+                    ),
+                    const SizedBox(height: 7),
+                    TextFormField(
+                      obscureText: isObscured,
+                      decoration: InputDecoration(
+                        hintText: 'Write your password',
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isObscured = !isObscured;
+                            });
+                          },
+                          child: isObscured
+                              ? const Icon(Icons.visibility_off_outlined)
+                              : const Icon(Icons.visibility_outlined),
+                        ),
+                      ),
+                      style: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.w700),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Password required';
+                        }
+                        return null;
+                      },
+                    ),
+
+                    // const Spacer(),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.14,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: FilledButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  context.go('/');
+                                }
+                              },
+                              child: const Text(
+                                "Login",
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w700),
+                              )),
+                        )
+                      ],
+                    ),
+                  ],
                 ),
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
               ),
-              const SizedBox(height: 25),
-              const Text(
-                "Password",
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-              ),
-              const SizedBox(height: 7),
-              TextField(
-                obscureText: isObscured,
-                decoration: InputDecoration(
-                  hintText: 'Write your password',
-                  suffixIcon: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isObscured = !isObscured;
-                      });
-                    },
-                    child: isObscured
-                        ? const Icon(Icons.visibility_off_outlined)
-                        : const Icon(Icons.visibility_outlined),
-                  ),
-                ),
-                style:
-                    const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
-              ),
-              // const Spacer(),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.14,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: FilledButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "Login",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w700),
-                        )),
-                  )
-                ],
-              )
             ],
           ),
         ),

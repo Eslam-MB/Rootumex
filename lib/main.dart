@@ -14,7 +14,7 @@ final _router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const Mainwrapper(child: HomeScreen()),
+      builder: (context, state) => const HomeScreen(),
     ),
     GoRoute(
       path: '/login',
