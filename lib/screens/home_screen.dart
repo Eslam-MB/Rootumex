@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rootumex/widgets/categories_card.dart';
 
@@ -9,6 +10,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: AppBar(
@@ -90,24 +92,90 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ],
               ),
+              SizedBox(height: 65),
             ],
           ),
         ),
       ),
-      bottomSheet: BottomSheet(
-        onClosing: () {},
-        builder: (context) => Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text("Account",
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14)),
-              TextButton(
-                  onPressed: () => context.go("/login"),
-                  child: const Text("Log out"))
+      bottomSheet: const ExpandableBottomSheet(),
+    );
+  }
+}
+
+class ExpandableBottomSheet extends StatefulWidget {
+  const ExpandableBottomSheet({super.key});
+
+  @override
+  State<ExpandableBottomSheet> createState() => _ExpandableBottomSheetState();
+}
+
+class _ExpandableBottomSheetState extends State<ExpandableBottomSheet> {
+  bool isExpanded = false;
+
+  void toggleSheet() {
+    setState(() {
+      isExpanded = !isExpanded;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: toggleSheet,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        padding: const EdgeInsets.all(16),
+        height: isExpanded ? 150 : 60,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 8,
+              offset: Offset(0, -2),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Account",
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+                ),
+                SvgPicture.asset(
+                  isExpanded
+                      ? "assets/images/arrows-to-line.svg"
+                      : "assets/images/arrows-from-line.svg",
+                  height: 20,
+                )
+              ],
+            ),
+            if (isExpanded) ...[
+              const SizedBox(height: 8),
+              const Text(
+                "56789012",
+                style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w700),
+              ),
+              const Spacer(),
+              FilledButton(
+                onPressed: () {
+                  context.go("/login");
+                },
+                style: FilledButton.styleFrom(
+                  minimumSize: const Size.fromHeight(40),
+                ),
+                child: const Text("Logout"),
+              ),
             ],
-          ),
+          ],
         ),
       ),
     );
