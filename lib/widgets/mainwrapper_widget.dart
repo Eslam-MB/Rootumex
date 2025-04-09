@@ -10,6 +10,7 @@ class Mainwrapper extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           title: const Text(
             "ROOTUMEX",

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rootumex/screens/receive_screen.dart';
 import 'package:rootumex/widgets/categories_card.dart';
+import 'package:rootumex/widgets/mainwrapper_widget.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -26,32 +28,39 @@ class HomeScreen extends ConsumerWidget {
           centerTitle: true,
         ),
       ),
-      body: const SafeArea(
-        minimum: EdgeInsets.all(8),
+      body: SafeArea(
+        minimum: const EdgeInsets.all(8),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Main Categories",
+              const Text("Main Categories",
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700)),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CategoriesCard(
-                    image: "assets/images/receive.svg",
-                    title: "Receive",
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const Mainwrapper(child: ReceiveScreen()))),
+                    child: const CategoriesCard(
+                      image: "assets/images/receive.svg",
+                      title: "Receive",
+                    ),
                   ),
-                  CategoriesCard(
+                  const CategoriesCard(
                     image: "assets/images/transfer.svg",
                     title: "Transfer",
                   ),
                 ],
               ),
-              SizedBox(height: 8),
-              Row(
+              const SizedBox(height: 8),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CategoriesCard(
@@ -64,8 +73,8 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 8),
-              Row(
+              const SizedBox(height: 8),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CategoriesCard(
@@ -78,8 +87,8 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 8),
-              Row(
+              const SizedBox(height: 8),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CategoriesCard(
@@ -92,7 +101,7 @@ class HomeScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 65),
+              const SizedBox(height: 65),
             ],
           ),
         ),
@@ -172,7 +181,11 @@ class _ExpandableBottomSheetState extends State<ExpandableBottomSheet> {
                 style: FilledButton.styleFrom(
                   minimumSize: const Size.fromHeight(40),
                 ),
-                child: const Text("Logout"),
+                child: const Text("Logout",
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700)),
               ),
             ],
           ],

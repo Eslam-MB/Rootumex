@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rootumex/screens/auth_screens/login_screen.dart';
 import 'package:rootumex/screens/home_screen.dart';
+import 'package:rootumex/screens/receive_screen.dart';
 import 'package:rootumex/widgets/mainwrapper_widget.dart';
 
 void main() {
@@ -20,6 +21,10 @@ final _router = GoRouter(
       path: '/login',
       builder: (context, state) => const LoginScreen(),
     ),
+    GoRoute(
+      path: '/receive',
+      builder: (context, state) => const Mainwrapper(child: ReceiveScreen()),
+    ),
   ],
 );
 
@@ -30,16 +35,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff143D60)),
           fontFamily: 'Nunito Sans',
           scaffoldBackgroundColor: const Color(0xffFDFCFA),
-          inputDecorationTheme: const InputDecorationTheme(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(14)),
+          inputDecorationTheme: InputDecorationTheme(
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade300, width: 1),
+              borderRadius: const BorderRadius.all(Radius.circular(14)),
             ),
-            contentPadding: EdgeInsets.all(8),
+            contentPadding: const EdgeInsets.all(8),
             filled: true,
             fillColor: Colors.white,
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(14)),
               borderSide: BorderSide(color: Color(0xff143D60), width: 2),
             ),
