@@ -142,21 +142,19 @@ class _ReceiveScreenState extends ConsumerState<ReceiveScreen> {
                       ],
                       rows: receiveList
                           .map((e) => DataRow(cells: [
-                                DataCell(GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Mainwrapper(
-                                              child: OrderNoScreen(e.key)),
-                                        ));
-                                  },
-                                  child: Text(e.key.toString(),
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 16,
-                                          color: Colors.black)),
-                                )),
+                                DataCell(onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Mainwrapper(
+                                            child: OrderNoScreen(e.key)),
+                                      ));
+                                },
+                                    Text(e.key.toString(),
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 16,
+                                            color: Colors.black))),
                                 DataCell(Text(e.value,
                                     style: const TextStyle(
                                         fontWeight: FontWeight.w700,
@@ -189,21 +187,19 @@ class _ReceiveScreenState extends ConsumerState<ReceiveScreen> {
                       ],
                       rows: receiveListCompleted
                           .map((e) => DataRow(cells: [
-                                DataCell(GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Mainwrapper(
-                                              child: CompletedOrder(e.key)),
-                                        ));
-                                  },
-                                  child: Text(e.key.toString(),
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 16,
-                                          color: Colors.black)),
-                                )),
+                                DataCell(onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Mainwrapper(
+                                            child: CompletedOrder(e.key)),
+                                      ));
+                                },
+                                    Text(e.key.toString(),
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 16,
+                                            color: Colors.black))),
                                 DataCell(Text(e.value,
                                     style: const TextStyle(
                                         fontWeight: FontWeight.w700,

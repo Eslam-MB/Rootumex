@@ -86,21 +86,19 @@ class _OrderNoScreenState extends ConsumerState<OrderNoScreen> {
                 ],
                 rows: receiveOrderNo
                     .map((e) => DataRow(cells: [
-                          DataCell(GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Mainwrapper(
-                                        child: ItemDetailsScreen(e.id)),
-                                  ));
-                            },
-                            child: Text(e.id.toString(),
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 16,
-                                    color: Colors.black)),
-                          )),
+                          DataCell(onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Mainwrapper(
+                                      child: ItemDetailsScreen(e.id)),
+                                ));
+                          },
+                              Text(e.id.toString(),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 16,
+                                      color: Colors.black))),
                           DataCell(Text(e.quantity.toString(),
                               style: const TextStyle(
                                   fontWeight: FontWeight.w700,
