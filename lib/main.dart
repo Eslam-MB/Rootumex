@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rootumex/screens/auth_screens/login_screen.dart';
 import 'package:rootumex/screens/home_screen.dart';
-import 'package:rootumex/screens/receive_screen.dart';
+import 'package:rootumex/screens/receive_screens/receive_screen.dart';
 import 'package:rootumex/widgets/mainwrapper_widget.dart';
 
 void main() {
@@ -39,6 +39,10 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Nunito Sans',
           scaffoldBackgroundColor: const Color(0xffFDFCFA),
           inputDecorationTheme: InputDecorationTheme(
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade300, width: 1),
+              borderRadius: const BorderRadius.all(Radius.circular(14)),
+            ),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey.shade300, width: 1),
               borderRadius: const BorderRadius.all(Radius.circular(14)),
