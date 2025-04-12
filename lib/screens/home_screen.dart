@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rootumex/screens/receive_screens/receive_screen.dart';
+import 'package:rootumex/screens/transfer_screens/transfer_main_screen.dart';
 import 'package:rootumex/widgets/categories_card.dart';
 import 'package:rootumex/widgets/mainwrapper_widget.dart';
 
@@ -53,9 +54,16 @@ class HomeScreen extends ConsumerWidget {
                       title: "Receive",
                     ),
                   ),
-                  const CategoriesCard(
-                    image: "assets/images/transfer.svg",
-                    title: "Transfer",
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Mainwrapper(
+                                child: TransferMainScreen()))),
+                    child: const CategoriesCard(
+                      image: "assets/images/transfer.svg",
+                      title: "Transfer",
+                    ),
                   ),
                 ],
               ),
