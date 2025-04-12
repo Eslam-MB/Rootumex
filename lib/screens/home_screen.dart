@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rootumex/screens/items_screen.dart';
 import 'package:rootumex/screens/receive_screens/receive_screen.dart';
+import 'package:rootumex/screens/return_screens.dart/return_main_screen.dart';
 import 'package:rootumex/screens/transfer_screens/transfer_main_screen.dart';
+import 'package:rootumex/screens/waste_screen.dart/waste_screen.dart';
 import 'package:rootumex/widgets/categories_card.dart';
 import 'package:rootumex/widgets/mainwrapper_widget.dart';
 
@@ -68,30 +71,51 @@ class HomeScreen extends ConsumerWidget {
                 ],
               ),
               const SizedBox(height: 8),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CategoriesCard(
+                  const CategoriesCard(
                     image: "assets/images/zones.svg",
                     title: "Zones",
                   ),
-                  CategoriesCard(
-                    image: "assets/images/return.svg",
-                    title: "Return",
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const Mainwrapper(child: ReturnMainScreen()))),
+                    child: const CategoriesCard(
+                      image: "assets/images/return.svg",
+                      title: "Return",
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 8),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CategoriesCard(
-                    image: "assets/images/waste.svg",
-                    title: "Waste",
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const Mainwrapper(child: WasteScreen()))),
+                    child: const CategoriesCard(
+                      image: "assets/images/waste.svg",
+                      title: "Waste",
+                    ),
                   ),
-                  CategoriesCard(
-                    image: "assets/images/items.svg",
-                    title: "Items",
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const Mainwrapper(child: ItemsScreen()))),
+                    child: const CategoriesCard(
+                      image: "assets/images/items.svg",
+                      title: "Items",
+                    ),
                   ),
                 ],
               ),
